@@ -29,15 +29,29 @@ public class AmazonScreenShotTest extends TestBaseBeforeClassAfterClass {
         driver.findElement(By.xpath("//*[@id='twotabsearchtextbox']"))
                 .sendKeys("Nutella", Keys.ENTER);
 
+        // 4- sonucun Nutella icerdigini test edin
         Assert.assertTrue(driver.getCurrentUrl().contains("Nutella"));
-            //    (driver.findElement(By.xpath("//*[@class='a-section a-spacing-small a-spacing-top-small]")).getText().contains("Nutella"));
 
-             //  WebElement ilkUrunShot= driver.findElement(By.xpath("(//*[@class='a-section a-spacing-base'])[1]"));
-        File nutellaSearch=driver.findElement(By.xpath("(//*[@class='a-section a-spacing-base'])[1]")).
-                getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(nutellaSearch,new File("target/ekranGoruntusu/products/firstProduct"+tarih+".jpeg"));
+        /*
+        //Sadece Web elementin resmini alacaksak TakeScreenShot classını kullanmama gerek yok
+        //Locate ettiğimiz webelementi direk geçici bir file'a atıp
+        FileUtils ile kopyalayıp yolunu(path) belirtiriz
+         */
 
+        // Sonucu gosteren yazinin  ekran goruntusunu alin
+        WebElement aramaSonucu=driver.findElement(By.xpath("(//*[@class='sg-col-inner'])[1]"));
+        File aramaSonucuShot=aramaSonucu.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(aramaSonucuShot,new File("target/ekranGoruntusu/products/aramaSonucu"+tarih+".jpeg"));
 
+       //  ve ilk urunun goruntusunu alin
+        WebElement nutellaSearch= driver.findElement(By.xpath("(//*[@class='a-section a-spacing-base'])[1]"));
+        File ilkUrunShot=nutellaSearch.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(ilkUrunShot,new File("target/ekranGoruntusu/products/firstProduct"+tarih+".jpeg"));
+
+        // nutella aramasında acilan ekranın goruntusunu alin
+        TakesScreenshot ts1= (TakesScreenshot) driver;
+        File producthomePageShot=ts1.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(producthomePageShot,new File("target/ekranGoruntusu/products/pAllPage"+tarih+".jpeg"));
 
     }
 }

@@ -31,11 +31,6 @@ public class C04_MouseBaseActions extends TestBaseBeforeAfter {
         //Tamam diyerek alert’i kapatalim
         driver.switchTo().alert().accept();
 
-
-        //Thread.sleep(100);
-      //  driver.navigate().refresh();
-       //actions.sendKeys(Keys.ESCAPE).perform();
-
         //Elemental Selenium linkine tiklayalim
         driver.findElement(By.xpath("//*[text()='Elemental Selenium']")).click();
        List<String> handleList=new ArrayList<>(driver.getWindowHandles());
